@@ -3,6 +3,7 @@
     {
       "name": "discord.token",
       "type": "java.lang.String",
+      "sourceType": "uno.d1s.slash.properties.DiscordConfigurationProperties",
       "description": "Discord bot token. Should be present.",
       "defaultValue": null
     }
