@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "discord.token",
+      "type": "java.lang.String",
+      "description": "Discord bot token. Should be present.",
+      "defaultValue": null
+    }
+  ]
+}
