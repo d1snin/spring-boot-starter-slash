@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "uno.d1s"
-version = "0.0.1-alpha.13"
+version = "0.0.1-alpha.14"
 
 repositories {
     mavenCentral()
@@ -24,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    api("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("net.dv8tion:JDA:${property("jdaVersion")}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

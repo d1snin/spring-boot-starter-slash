@@ -19,6 +19,6 @@ internal class JdaOptionTypeMapper : OptionTypeMapper {
             GuildChannel::class.java -> OptionTypeDefinition.CHANNEL
             Role::class.java -> OptionTypeDefinition.ROLE
             IMentionable::class.java -> OptionTypeDefinition.MENTIONABLE
-            else -> throw IllegalArgumentException("Type is not supported: ${type.simpleName}")
+            else -> throw IllegalArgumentException("Type is not supported: $type")
         }
 }

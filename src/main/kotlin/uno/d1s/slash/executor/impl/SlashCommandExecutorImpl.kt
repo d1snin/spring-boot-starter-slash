@@ -45,24 +45,18 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
 
         val returnValue = method.invoke(
             applicationContext.getBean(method.declaringClass),
-            *buildList {
-                val parameters = method.parameters
+            *method.parameters.map {
+                val option = AnnotationUtils.findAnnotation(it, Option::class.java)
 
-                parameters.forEach {
-                    val option = AnnotationUtils.findAnnotation(it, Option::class.java)
-
-                    add(
-                        option?.let {
-                            injectableOptions.first { injectableOption ->
-                                injectableOption.name == option.name
-                            }.obj!!
-                        } ?: run {
-                            (injectableParameters.firstOrNull { injectableParameter ->
-                                injectableParameter.type == it.type
-                            }
-                                ?: throw IllegalStateException("Parameter value of this type could not be injected: ${it.type}")).obj!!
-                        }
-                    )
+                option?.let {
+                    injectableOptions.first { injectableOption ->
+                        injectableOption.name == option.name
+                    }.obj!!
+                } ?: run {
+                    (injectableParameters.firstOrNull { injectableParameter ->
+                        injectableParameter.type == it.type
+                    }
+                        ?: throw IllegalStateException("Parameter value of this type could not be injected: ${it.type}")).obj!!
                 }
             }.toTypedArray()
         )
