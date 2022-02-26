@@ -62,8 +62,10 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
         )
 
         if (returnValue != null) {
-            if (returnValue::class.java !in returnValueProcessor.supportedTypes()) {
-                logger.warn("Return type is not supported by the processor:  It is ignored.")
+            val type = method.returnType
+
+            if (type !in returnValueProcessor.supportedTypes()) {
+                logger.warn("Return type is not supported by the processor: $type. It is ignored.")
             } else {
                 returnValueProcessor.processValue(returnValue)
             }
