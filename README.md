@@ -34,3 +34,8 @@ public final class TestController {
 ```
 
 The bot will reply with plain message in the example above.
+
+### Supported API implementations
+- [x] [`JDA`](https://github.com/DV8FromTheWorld/JDA)
+
+There is an autoconfiguration for each implementation, all you need to do is add the necessary dependency to your project.
