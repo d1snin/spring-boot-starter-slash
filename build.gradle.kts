@@ -11,13 +11,13 @@ plugins {
 }
 
 group = "uno.d1s"
-version = "0.0.1-alpha.14"
+version = "0.0.2-alpha.0"
 
 repositories {
     mavenCentral()
 }
 
-extra["jdaVersion"] = "5.0.0-alpha.5"
+extra["jdaVersion"] = "5.0.0-alpha.9"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
