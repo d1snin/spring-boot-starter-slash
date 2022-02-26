@@ -76,6 +76,8 @@ internal class JdaSlashCommandInteractionEventListener : ListenerAdapter() {
                     Message::class.java,
                     MessageEmbed::class.java,
                     EmbedBuilder::class.java,
+                    RestAction::class.java,
+                    DeferReplier::class.java
                 )
             }
         )
