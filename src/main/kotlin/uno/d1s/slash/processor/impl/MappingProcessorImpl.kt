@@ -17,6 +17,7 @@ import uno.d1s.slash.mapper.OptionTypeMapper
 import uno.d1s.slash.processor.MappingProcessor
 import uno.d1s.slash.registrar.SlashCommandRegistrar
 import uno.d1s.slash.registry.SlashCommandExecutionRegistry
+import uno.d1s.slash.util.getOptionAnnotation
 import uno.d1s.slash.util.logger
 import java.lang.reflect.Method
 import java.lang.reflect.Parameter
@@ -144,8 +145,6 @@ internal class MappingProcessorImpl : MappingProcessor {
             )
         }
     }
-
-    private fun Parameter.getOptionAnnotation() = AnnotationUtils.findAnnotation(this, Option::class.java)
 
     @EventListener(ContextRefreshedEvent::class)
     fun registerDefinitions() {

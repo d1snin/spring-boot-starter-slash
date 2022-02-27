@@ -9,6 +9,7 @@ import uno.d1s.slash.domain.execution.InjectableParameter
 import uno.d1s.slash.executor.SlashCommandExecutor
 import uno.d1s.slash.processor.ReturnValueProcessor
 import uno.d1s.slash.registry.SlashCommandExecutionRegistry
+import uno.d1s.slash.util.getOptionAnnotation
 import uno.d1s.slash.util.logger
 
 internal class SlashCommandExecutorImpl : SlashCommandExecutor {
@@ -29,16 +30,8 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
     ) {
         val execution = slashCommandExecutionRegistry[commandName]
 
-        if (injectableOptions != execution.injectableOptions) {
-            throw IllegalArgumentException("Injectable options are conflicting with predefined ones.")
-        }
-
         injectableParameters.forEach {
             it.obj ?: throw IllegalArgumentException("Parameter's value can not be null.")
-        }
-
-        injectableOptions.forEach {
-            it.obj ?: throw IllegalArgumentException("Option's value can not be null.")
         }
 
         val method = execution.method
@@ -46,17 +39,18 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
         val returnValue = method.invoke(
             applicationContext.getBean(method.declaringClass),
             *method.parameters.map {
-                val option = AnnotationUtils.findAnnotation(it, Option::class.java)
+                val option = it.getOptionAnnotation()
 
-                option?.let {
-                    injectableOptions.first { injectableOption ->
+                if (option != null) {
+                    injectableOptions.firstOrNull { injectableOption ->
                         injectableOption.name == option.name
-                    }.obj!!
-                } ?: run {
+                    }?.obj
+                } else {
                     (injectableParameters.firstOrNull { injectableParameter ->
                         injectableParameter.type == it.type
-                    }
-                        ?: throw IllegalStateException("Parameter value of this type could not be injected: ${it.type}")).obj!!
+                    } ?: throw IllegalStateException(
+                        "Parameter value of this type could not be injected: ${it.type}"
+                    )).obj!!
                 }
             }.toTypedArray()
         )

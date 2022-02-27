@@ -36,6 +36,7 @@ internal class JdaSlashCommandInteractionEventListener : ListenerAdapter() {
                 )
             },
             event.options.map {
+                event.getOption("")
                 InjectableOption(
                     it.name
                 ).apply {

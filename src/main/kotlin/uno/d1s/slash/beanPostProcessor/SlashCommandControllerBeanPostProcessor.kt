@@ -18,12 +18,13 @@ internal class SlashCommandControllerBeanPostProcessor : BeanPostProcessor {
 
     override fun postProcessBeforeInitialization(bean: Any, beanName: String): Any {
         val beanClass = bean::class.java
-
         if (beanClass.isAnnotationPresent(SlashCommandController::class.java)) {
             logger.debug("Found the controller: $beanClass")
             beanClass.methods.forEach { method ->
-                AnnotationUtils.findAnnotation(method, SlashCommandMapping::class.java)?.let {
-                    mappingProcessor.process(SlashCommandExecution(method, it))
+                AnnotationUtils.findAnnotation(method, SlashCommandMapping::class.java)?.let { mapping ->
+                    mappingProcessor.process(
+                        SlashCommandExecution(method, mapping)
+                    )
                 }
             }
         }

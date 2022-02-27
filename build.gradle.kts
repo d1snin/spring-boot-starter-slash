@@ -11,17 +11,19 @@ plugins {
 }
 
 group = "uno.d1s"
-version = "0.0.3-alpha.0"
+version = "0.1.0-alpha.0"
 
 repositories {
     mavenCentral()
 }
 
 extra["jdaVersion"] = "5.0.0-alpha.9"
+extra["apacheCommonsVersion"] = "3.12.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.apache.commons:commons-lang3:${property("apacheCommonsVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.springframework.boot:spring-boot-configuration-processor")
