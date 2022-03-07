@@ -1,11 +1,10 @@
 package uno.d1s.slash.processor.impl
 
+import dev.d1s.teabag.logging.logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.event.ContextRefreshedEvent
 import org.springframework.context.event.EventListener
-import org.springframework.core.annotation.AnnotationUtils
-import uno.d1s.slash.annotation.Option
 import uno.d1s.slash.domain.ChannelTypeDefinition
 import uno.d1s.slash.domain.CommandChoiceDefinition
 import uno.d1s.slash.domain.OptionDefinition
@@ -18,7 +17,6 @@ import uno.d1s.slash.processor.MappingProcessor
 import uno.d1s.slash.registrar.SlashCommandRegistrar
 import uno.d1s.slash.registry.SlashCommandExecutionRegistry
 import uno.d1s.slash.util.getOptionAnnotation
-import uno.d1s.slash.util.logger
 import java.lang.reflect.Method
 import java.lang.reflect.Parameter
 import java.util.*
@@ -40,11 +38,11 @@ internal class MappingProcessorImpl : MappingProcessor {
 
     private val definitions: MutableSet<SlashCommandDefinition> = CopyOnWriteArraySet()
 
-    private val logger = logger()
+    private val log = logger
 
     override fun process(execution: SlashCommandExecution) {
         val method = execution.method
-        logger.debug("Processing mapping: $method")
+        log.debug("Processing mapping: $method")
 
         val parameters = method.parameters
         val mapping = execution.mapping
@@ -136,7 +134,7 @@ internal class MappingProcessorImpl : MappingProcessor {
 
     private fun executeCustomizer(method: Method, obj: Any, slashCommandDefinition: SlashCommandDefinition) {
         if (method.parameters.size == 1 && method.parameters[0].type == SlashCommandDefinition::class.java) {
-            logger.debug("Executing customizer: $method")
+            log.debug("Executing customizer: $method")
             method.invoke(obj, slashCommandDefinition)
         } else {
             throw IllegalStateException(
@@ -149,6 +147,6 @@ internal class MappingProcessorImpl : MappingProcessor {
     @EventListener(ContextRefreshedEvent::class)
     fun registerDefinitions() {
         slashCommandRegistrar.registerAll(definitions)
-        logger.info("Slash commands have been initialized.")
+        log.info("Slash commands have been initialized.")
     }
 }

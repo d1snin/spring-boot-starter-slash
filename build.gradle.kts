@@ -15,15 +15,18 @@ version = "0.1.0-alpha.0"
 
 repositories {
     mavenCentral()
+    maven(url = "https://jitpack.io/")
 }
 
 val jdaVersion: String by project
+val teabagsVersion: String by project
 val apacheCommonsVersion: String by project
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
+    implementation("dev.d1s.teabags:teabag-spring-logging:$teabagsVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.springframework.boot:spring-boot-configuration-processor")

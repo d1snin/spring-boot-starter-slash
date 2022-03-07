@@ -1,16 +1,14 @@
 package uno.d1s.slash.executor.impl
 
+import dev.d1s.teabag.logging.logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
-import org.springframework.core.annotation.AnnotationUtils
-import uno.d1s.slash.annotation.Option
 import uno.d1s.slash.domain.execution.InjectableOption
 import uno.d1s.slash.domain.execution.InjectableParameter
 import uno.d1s.slash.executor.SlashCommandExecutor
 import uno.d1s.slash.processor.ReturnValueProcessor
 import uno.d1s.slash.registry.SlashCommandExecutionRegistry
 import uno.d1s.slash.util.getOptionAnnotation
-import uno.d1s.slash.util.logger
 
 internal class SlashCommandExecutorImpl : SlashCommandExecutor {
 
@@ -20,7 +18,7 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
     @Autowired
     private lateinit var applicationContext: ApplicationContext
 
-    private val logger = logger()
+    private val log = logger
 
     override fun execute(
         commandName: String,
@@ -59,7 +57,7 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
             val type = method.returnType
 
             if (type !in returnValueProcessor.supportedTypes()) {
-                logger.warn("Return type is not supported by the processor: $type. It is ignored.")
+                log.warn("Return type is not supported by the processor: $type. It is ignored.")
             } else {
                 returnValueProcessor.processValue(returnValue)
             }
