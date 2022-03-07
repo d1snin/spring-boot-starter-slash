@@ -17,17 +17,17 @@ repositories {
     mavenCentral()
 }
 
-extra["jdaVersion"] = "5.0.0-alpha.9"
-extra["apacheCommonsVersion"] = "3.12.0"
+val jdaVersion: String by project
+val apacheCommonsVersion: String by project
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.apache.commons:commons-lang3:${property("apacheCommonsVersion")}")
+    implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.springframework.boot:spring-boot-configuration-processor")
-    compileOnly("net.dv8tion:JDA:${property("jdaVersion")}")
+    compileOnly("net.dv8tion:JDA:$jdaVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
