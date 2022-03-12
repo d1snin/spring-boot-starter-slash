@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -10,8 +9,8 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
 }
 
-group = "uno.d1s"
-version = "0.1.0-alpha.0"
+group = "dev.d1s"
+version = "1.0.0-stable.0"
 
 repositories {
     mavenCentral()
@@ -21,6 +20,8 @@ repositories {
 val jdaVersion: String by project
 val teabagsVersion: String by project
 val apacheCommonsVersion: String by project
+val springMockkVersion: String by project
+val striktVersion: String by project
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
@@ -31,6 +32,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("net.dv8tion:JDA:$jdaVersion")
+    testImplementation("net.dv8tion:JDA:$jdaVersion")
+    testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
+    testImplementation("io.strikt:strikt-jvm:$striktVersion")
+    testImplementation("dev.d1s.teabags:teabag-testing:$teabagsVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -77,5 +82,5 @@ publishing {
 }
 
 kotlin {
-    explicitApi = ExplicitApiMode.Warning
+    explicitApiWarning()
 }
