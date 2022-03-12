@@ -1,0 +1,9 @@
+package dev.d1s.slash.autoconfiguration
+
+import dev.d1s.slash.properties.DiscordConfigurationProperties
+import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+@EnableConfigurationProperties(DiscordConfigurationProperties::class)
+public class ConfigurationPropertiesAutoConfiguration
