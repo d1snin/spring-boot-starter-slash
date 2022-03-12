@@ -32,7 +32,7 @@ public final class TestController {
     }
 
     @SlashCommandMapping(name = "hello", description = "Say hello.")
-    public String hello(@Option(name = "name", description = "Your name.") String name) {
+    public String hello(@Option(name = "name", description = "Your name.") final String name) {
         return helloService.sayHello(name);
     }
 }
