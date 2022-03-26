@@ -13,7 +13,7 @@ internal class SlashCommandControllerBeanPostProcessor : BeanPostProcessor {
     @Autowired
     private lateinit var mappingProcessor: MappingProcessor
 
-    private val log = logger
+    private val log = logger(this::class)
 
     override fun postProcessBeforeInitialization(bean: Any, beanName: String): Any {
         val beanClass = bean::class.java

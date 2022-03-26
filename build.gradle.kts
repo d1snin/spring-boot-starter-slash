@@ -30,7 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
-    implementation("dev.d1s.teabags:teabag-spring-logging:$teabagsVersion")
+    implementation("dev.d1s.teabags:teabag-slf4j:$teabagsVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     api("org.springframework.boot:spring-boot-configuration-processor")

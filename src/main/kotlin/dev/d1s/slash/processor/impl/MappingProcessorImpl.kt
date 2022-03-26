@@ -33,7 +33,7 @@ internal class MappingProcessorImpl : MappingProcessor {
 
     private val definitions: MutableSet<SlashCommandDefinition> = CopyOnWriteArraySet()
 
-    private val log = logger
+    private val log = logger(this::class)
 
     override fun process(execution: SlashCommandExecution) {
         val method = execution.method

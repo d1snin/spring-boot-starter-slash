@@ -14,7 +14,7 @@ internal class SlashCommandExecutorImpl : SlashCommandExecutor {
     @Autowired
     private lateinit var slashCommandExecutionRegistry: SlashCommandExecutionRegistry
 
-    private val log = logger
+    private val log = logger(this::class)
 
     override fun execute(
         commandName: String,
